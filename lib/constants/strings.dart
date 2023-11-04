@@ -1,0 +1,36 @@
+class AppStrings {
+  static const kAppName = 'Nour Enaik';
+  static const kRegister = 'register';
+  static const kLogin = 'login';
+  static const kName = 'full_name';
+  static const kPhone = 'phone_number';
+  static const kEmail = 'email';
+  static const kProfile = 'profile';
+  static const kEditProfile = 'edit_profile';
+  static const kSaveChanges = 'save_changes';
+  static const kChangePassword = 'change_password';
+  static const kEdit = 'edit';
+  static const kDelete = 'delete';
+  static const kSettings = 'settings';
+  static const kLanguage = 'language';
+  static const kNotifications = 'notifications';
+  static const kEnabled = 'enabled';
+  static const kTitle = 'title';
+  static const kSignIn = 'sign_in';
+  static const kWelcomeBack = 'welcome_back';
+  static const kSignInToContinue = 'sign_continue';
+  static const kRememberMe = 'remember';
+  static const kForgetPassword = 'forget_password';
+  static const kPassword = 'password';
+  static const kConfirmPassword = 'confirm_password';
+  static const kPolicy = 'policy';
+  static const kNotHaveAccount = 'not_have_account';
+  static const kHaveAccount = 'have_account';
+  static const kSignUp = 'sign_up';
+  static const kContactUs = 'contact_us';
+  static const kLogout = 'logout';
+  static const kPrivacyPolicy = 'privacy_policy';
+  static const kTermsService = 'terms_service';
+  static const kAnd = 'and';
+  static const kOrLoginScreen = 'or';
+}
