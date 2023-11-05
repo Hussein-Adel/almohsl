@@ -1,6 +1,7 @@
 class AppAssets {
   static const String kAssets = 'assets/images';
-  static const kHomeBag = '$kAssets/home-bg.png';
+  static const kLogo = '$kAssets/logo.png';
+  static const kCollector = '$kAssets/collector.png';
   static const kHomeBagImg = '$kAssets/home-page-img.png';
   static const kEyePressure = '$kAssets/eye-pressure.png';
   static const kFa7sKa3El3in = '$kAssets/Fa7s-ka3-el3in.png';

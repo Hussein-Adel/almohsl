@@ -22,10 +22,10 @@ class AppColors {
   static const Color liteBlue2 = Color(0xffDAE2FF);
   static const Color gray = Color(0xffBFBFBF);
 
-  static const Color darkGray = Color(0xff8A8D9F);
+  static const Color darkGray = Color(0xff5b5b5b);
   static const Color lightPurple = Color(0xFFEDE7F6);
   static const Color darkPurple = Color(0xFF4A148C);
-  static const Color orange = Color(0xffFFBF3D);
+  static const Color orange = Color(0xffec892b);
   static const Color orange2 = Color(0xffF3A70F);
 
   static const Color lightBlue = Color(0xff2BBEDE);
@@ -44,8 +44,7 @@ class AppColors {
   static const Color darkBlue = Color(0xff0F2348);
   static const Color gold = Color(0xffFFC107);
   static const Color gold2 = Color(0xffFEBE00);
-  static const Color green = Color(0xff60D979);
-  static const Color bGreen = Color(0xff2BDE90);
+  static const Color green = Color(0xff61b77a);
   static const Color cyan = Color(0xff1CD2E2);
   static const Color error = Color(0xffe61f34); // red Color
 }

@@ -117,13 +117,13 @@ class TextFormFieldBuilder extends StatelessWidget {
                   ? defaultBorder
                       ? UnderlineInputBorder(
                           borderRadius: BorderRadius.circular(borderRadius),
-                          borderSide: const BorderSide(
-                              color: AppColors.green, width: 2))
+                          borderSide:
+                              BorderSide(color: borderColor, width: 2.5.sp))
                       : OutlineInputBorder(
                           gapPadding: 0.0,
                           borderRadius: BorderRadius.circular(borderRadius),
                           borderSide: BorderSide(
-                            width: 2.sp,
+                            width: 1.25.sp,
                             color: borderColor,
                           ),
                         )
@@ -142,7 +142,7 @@ class TextFormFieldBuilder extends StatelessWidget {
                 gapPadding: 0.0,
                 borderRadius: BorderRadius.circular(borderRadius),
                 borderSide: BorderSide(
-                  width: 2.sp,
+                  width: 1.25.sp,
                   color: borderColor,
                 ),
               ),
@@ -150,13 +150,13 @@ class TextFormFieldBuilder extends StatelessWidget {
                   ? defaultBorder
                       ? UnderlineInputBorder(
                           borderRadius: BorderRadius.circular(borderRadius),
-                          borderSide: const BorderSide(
-                              color: AppColors.green, width: 2))
+                          borderSide:
+                              BorderSide(color: borderColor, width: 2.5.sp))
                       : OutlineInputBorder(
                           gapPadding: 0.0,
                           borderRadius: BorderRadius.circular(borderRadius),
                           borderSide: BorderSide(
-                            width: 2.sp,
+                            width: 1.25.sp,
                             color: borderColor,
                           ),
                         )
@@ -165,14 +165,13 @@ class TextFormFieldBuilder extends StatelessWidget {
                   ? defaultBorder
                       ? UnderlineInputBorder(
                           borderRadius: BorderRadius.circular(borderRadius),
-                          borderSide: const BorderSide(
-                              color: AppColors.green, width: 2),
-                        )
+                          borderSide:
+                              BorderSide(color: borderColor, width: 2.5.sp))
                       : OutlineInputBorder(
                           gapPadding: 0.0,
                           borderRadius: BorderRadius.circular(borderRadius),
                           borderSide: BorderSide(
-                            width: 2.sp,
+                            width: 1.25.sp,
                             color: borderColor,
                           ),
                         )
@@ -181,7 +180,7 @@ class TextFormFieldBuilder extends StatelessWidget {
                 gapPadding: 0.0,
                 borderRadius: BorderRadius.circular(borderRadius),
                 borderSide: BorderSide(
-                  width: 2.sp,
+                  width: 1.25.sp,
                   color: borderColor,
                 ),
               ),
@@ -189,13 +188,13 @@ class TextFormFieldBuilder extends StatelessWidget {
                   ? defaultBorder
                       ? UnderlineInputBorder(
                           borderRadius: BorderRadius.circular(borderRadius),
-                          borderSide: const BorderSide(
-                              color: AppColors.transparent, width: 2))
+                          borderSide:
+                              BorderSide(color: borderColor, width: 2.5.sp))
                       : OutlineInputBorder(
                           gapPadding: 0.0,
                           borderRadius: BorderRadius.circular(borderRadius),
                           borderSide: BorderSide(
-                            width: 2.sp,
+                            width: 1.25.sp,
                             color: borderColor,
                           ),
                         )

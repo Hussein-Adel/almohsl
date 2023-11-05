@@ -19,4 +19,15 @@ class Util {
         textColor: AppColors.white,
         fontSize: AppFontSizes.kS5);
   }
+
+  static Future<bool?> kToastNOFilePicked() {
+    return Fluttertoast.showToast(
+        msg: "لقد قمت بإلغاء أختيار الملف",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: AppColors.gray,
+        textColor: AppColors.white,
+        fontSize: AppFontSizes.kS5);
+  }
 }

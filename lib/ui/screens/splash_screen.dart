@@ -39,15 +39,9 @@ class _SplashScreenState extends State<SplashScreen>
     return Scaffold(
         body: Container(
       padding: EdgeInsets.symmetric(horizontal: 5.w),
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(AppAssets.kHomeBag),
-          fit: BoxFit.cover,
-        ),
-      ),
       child: Center(
         child: Image.asset(
-          AppAssets.kLogoNourEnaik,
+          AppAssets.kLogo,
           scale: 1,
         ),
       ),
