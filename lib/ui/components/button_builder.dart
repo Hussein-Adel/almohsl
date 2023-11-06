@@ -17,6 +17,7 @@ class ButtonBuilder extends StatelessWidget {
   final EdgeInsets? margin;
   final TextStyle? titleStyle;
   final double? elevation;
+  final MaterialStateProperty<OutlinedBorder>? shape;
 
   const ButtonBuilder({
     super.key,
@@ -33,6 +34,7 @@ class ButtonBuilder extends StatelessWidget {
     this.titleStyle,
     this.borderColor = AppColors.blue,
     this.elevation = 0,
+    this.shape,
   });
 
   @override
@@ -52,13 +54,14 @@ class ButtonBuilder extends StatelessWidget {
                 color: borderColor,
               ),
             ),
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(radius ?? 50),
+            shape: shape ??
+                MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(radius ?? 50),
+                    ),
+                  ),
                 ),
-              ),
-            ),
             backgroundColor: MaterialStateProperty.all(
               buttonColor,
             )),
@@ -71,10 +74,11 @@ class ButtonBuilder extends StatelessWidget {
             prefixIcon ?? const SizedBox(),
             Text(
               title,
-              style: TextStyle(
-                  fontSize: 10.w / 3,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.darkBlue),
+              style: titleStyle ??
+                  TextStyle(
+                      fontSize: 10.w / 3,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.darkBlue),
             ),
             suffixIcon ?? const SizedBox()
           ],

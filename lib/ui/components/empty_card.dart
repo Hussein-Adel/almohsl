@@ -65,9 +65,9 @@ class EmptyCard extends StatelessWidget {
         boxShadow: shadow == true
             ? [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.2),
-                  spreadRadius: 7.5,
-                  blurRadius: 7.5,
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 6.5,
+                  blurRadius: 6.5,
                   offset: const Offset(0, 5), // changes position of shadow
                 ),
               ]
