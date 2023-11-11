@@ -12,7 +12,8 @@ class BottomSheetBuilder extends StatelessWidget {
       this.height,
       this.radius,
       this.onPop,
-      this.backgroundColor})
+      this.backgroundColor,
+      this.scroll = true})
       : super(key: key);
 
   final List<Widget> children;
@@ -22,6 +23,7 @@ class BottomSheetBuilder extends StatelessWidget {
   final Widget? bottomWidget;
   final Color? backgroundColor;
   final Function()? onPop;
+  final bool scroll;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class BottomSheetBuilder extends StatelessWidget {
       child: Scaffold(
         backgroundColor: backgroundColor ?? Colors.transparent,
         body: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -54,8 +57,11 @@ class BottomSheetBuilder extends StatelessWidget {
                             topRight: Radius.circular(25)),
                     color: AppColors.liteWight),
                 height: height != null ? height! * 0.67 : 80.h,
-                padding: EdgeInsets.symmetric(vertical: 2.5.h),
+                padding: EdgeInsets.symmetric(horizontal: 4.w),
                 child: SingleChildScrollView(
+                  physics: scroll
+                      ? const AlwaysScrollableScrollPhysics()
+                      : const NeverScrollableScrollPhysics(),
                   child: Column(
                     crossAxisAlignment:
                         crossAlignment ?? CrossAxisAlignment.center,

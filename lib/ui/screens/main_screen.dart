@@ -48,10 +48,13 @@ class MainScreen extends StatelessWidget {
                 AppAssets.kCollector,
               ),
             ),
-            onTap: () => Get.bottomSheet(
-              AdminBottomSheet(),
-              isScrollControlled: true,
-            ),
+            onTap: () => showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.transparent,
+                isScrollControlled: true,
+                builder: (context) {
+                  return AdminBottomSheet();
+                }),
           )
         ],
         backgroundColor: AppColors.darkGray,

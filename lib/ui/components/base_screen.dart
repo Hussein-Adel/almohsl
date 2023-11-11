@@ -15,6 +15,7 @@ class BaseScreen extends StatelessWidget {
     this.bottomNavigationBar,
     this.isLoading,
     this.floatingActionButton,
+    this.backgroundColor,
   });
   final Widget body;
   final Widget? floatingActionButton;
@@ -25,6 +26,7 @@ class BaseScreen extends StatelessWidget {
   final double? verticalPadding;
   final Widget? bottomNavigationBar;
   final bool? isLoading;
+  final Color? backgroundColor;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +37,7 @@ class BaseScreen extends StatelessWidget {
       body: Stack(
         children: [
           Container(
+            color: backgroundColor,
             padding: EdgeInsets.symmetric(
                 horizontal: horizontalPadding?.w ?? 0,
                 vertical: verticalPadding?.h ?? 4.h),

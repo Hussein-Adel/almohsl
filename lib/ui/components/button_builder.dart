@@ -10,7 +10,7 @@ class ButtonBuilder extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final String title;
-  final Color titleColor;
+  final Color? titleColor;
   final double? width;
   final double? height;
   final double? radius;
@@ -26,7 +26,7 @@ class ButtonBuilder extends StatelessWidget {
     this.prefixIcon,
     required this.title,
     this.onPressed,
-    this.titleColor = Colors.white,
+    this.titleColor,
     this.width,
     this.height,
     this.radius,
@@ -76,9 +76,9 @@ class ButtonBuilder extends StatelessWidget {
               title,
               style: titleStyle ??
                   TextStyle(
-                      fontSize: 10.w / 3,
+                      fontSize: 13.5.sp,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.darkBlue),
+                      color: titleColor ?? AppColors.white),
             ),
             suffixIcon ?? const SizedBox()
           ],

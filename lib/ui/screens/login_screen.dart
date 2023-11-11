@@ -1,4 +1,3 @@
-import 'package:almohsl/ui/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -7,6 +6,7 @@ import 'package:wc_form_validators/wc_form_validators.dart';
 import '../../constants/constants.dart';
 import '../../controllers/controllers.dart';
 import '../components/components.dart';
+import 'screens.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -70,6 +70,36 @@ class LoginScreen extends StatelessWidget {
                                 height: 5.h,
                                 controller: controller.passwordController,
                               ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        child: Row(
+                          children: [
+                            CheckBoxBuilder(
+                              onChanged: (value) {},
+                              value: true,
+                              activeColor:
+                                  AppColors.darkGray.withOpacity(0.125),
+                              checkColor: AppColors.green,
+                            ),
+                            Text(
+                              'تذكرني',
+                              style: TextStyle(fontSize: 11.sp),
+                            ),
+                            const Spacer(),
+                            GestureDetector(
+                              onTap: () => Get.to(ForgetPasswordScreen()),
+                              child: Text(
+                                'نسيت كلمة المرور ؟',
+                                style: TextStyle(
+                                    fontSize: 11.sp, color: AppColors.darkGray),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10.w,
                             ),
                           ],
                         ),
