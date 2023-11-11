@@ -70,7 +70,6 @@ class SharedPref {
   }
 
   void deleteLoginInfo() {
-    print("isssss= hello");
     if (_preferences!.containsKey('access_token')) {
       _preferences!.clear();
     }

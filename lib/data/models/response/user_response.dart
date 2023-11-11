@@ -8,14 +8,14 @@ class UserData {
 
   UserData.fromJson(Map<String, dynamic> json) {
     token = json['token'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['admin'] != null ? User.fromJson(json['admin']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['token'] = token;
     if (user != null) {
-      data['user'] = user!.toJson();
+      data['admin'] = user!.toJson();
     }
     return data;
   }
@@ -34,16 +34,12 @@ class User {
   String? name;
   String? email;
   String? phone;
-  String? doctorName;
-  String? otp;
 
   User({
     this.id,
     this.name,
     this.email,
     this.phone,
-    this.doctorName,
-    this.otp,
   });
 
   User.fromJson(Map<String, dynamic> json) {
@@ -51,8 +47,6 @@ class User {
     name = json['name'];
     email = json['email'];
     phone = json['phone'];
-    doctorName = json['doctor_name'];
-    otp = json['otp'];
   }
 
   Map<String, dynamic> toJson() {
@@ -61,8 +55,6 @@ class User {
     data['name'] = name;
     data['email'] = email;
     data['phone'] = phone;
-    data['doctor_name'] = doctorName;
-    data['otp'] = otp;
     return data;
   }
 }

@@ -31,7 +31,7 @@ class LoadingWidget extends StatelessWidget {
       height: 50.h,
       child: Center(
         child: LoadingAnimationWidget.threeArchedCircle(
-          color: AppColors.blue,
+          color: AppColors.orange,
           size: 50.sp,
         ),
       ),

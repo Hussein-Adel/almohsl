@@ -176,14 +176,21 @@ class TextFormFieldBuilder extends StatelessWidget {
                           ),
                         )
                   : null,
-              focusedErrorBorder: OutlineInputBorder(
-                gapPadding: 0.0,
-                borderRadius: BorderRadius.circular(borderRadius),
-                borderSide: BorderSide(
-                  width: 1.25.sp,
-                  color: borderColor,
-                ),
-              ),
+              focusedErrorBorder: haveBorder
+                  ? defaultBorder
+                      ? UnderlineInputBorder(
+                          borderRadius: BorderRadius.circular(borderRadius),
+                          borderSide:
+                              BorderSide(color: borderColor, width: 2.5.sp))
+                      : OutlineInputBorder(
+                          gapPadding: 0.0,
+                          borderRadius: BorderRadius.circular(borderRadius),
+                          borderSide: BorderSide(
+                            width: 1.25.sp,
+                            color: borderColor,
+                          ),
+                        )
+                  : null,
               enabledBorder: haveBorder
                   ? defaultBorder
                       ? UnderlineInputBorder(

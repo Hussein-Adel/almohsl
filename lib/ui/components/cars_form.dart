@@ -12,24 +12,30 @@ class CarForm extends StatelessWidget {
   final Function() deleteCar;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50.h,
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 5.h),
+      padding: EdgeInsets.symmetric(vertical: 2.5.h, horizontal: 2.5.w),
+      decoration: BoxDecoration(
+        color: AppColors.white.withOpacity(0.125),
+        borderRadius: BorderRadius.circular(17.5),
+      ),
+      height: 40.h,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-            height: 2.5.h,
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'بيانات السيارة',
-                style: TextStyle(
-                    color: AppColors.darkGray,
-                    fontWeight: FontWeight.bold,
-                    fontSize: AppFontSizes.kS4),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.w),
+                child: Text(
+                  'بيانات السيارة',
+                  style: TextStyle(
+                      color: AppColors.darkGray,
+                      fontWeight: FontWeight.bold,
+                      fontSize: AppFontSizes.kS4),
+                ),
               ),
               IconButton(
                 onPressed: deleteCar,
@@ -44,20 +50,9 @@ class CarForm extends StatelessWidget {
             hint: 'رقم اللوحة',
             validator: Validators.required('required'),
             horizontalMargin: 0,
-            height: 6.h,
+            verticalMargin: 0,
             keyboardType: TextInputType.emailAddress,
             controller: carControllers[0],
-          ),
-          TextFormFieldBuilder(
-            defaultBorder: true,
-            borderColor: AppColors.green,
-            color: Colors.transparent,
-            hint: 'معادلة',
-            validator: Validators.required('required'),
-            horizontalMargin: 0,
-            height: 6.h,
-            keyboardType: TextInputType.emailAddress,
-            controller: carControllers[1],
           ),
           TextFormFieldBuilder(
             defaultBorder: true,
@@ -66,9 +61,9 @@ class CarForm extends StatelessWidget {
             hint: 'النوع',
             validator: Validators.required('required'),
             horizontalMargin: 0,
-            height: 6.h,
+            verticalMargin: 0,
             keyboardType: TextInputType.emailAddress,
-            controller: carControllers[2],
+            controller: carControllers[1],
           ),
           TextFormFieldBuilder(
             defaultBorder: true,
@@ -77,9 +72,9 @@ class CarForm extends StatelessWidget {
             hint: 'الموقع',
             validator: Validators.required('required'),
             horizontalMargin: 0,
-            height: 6.h,
+            verticalMargin: 0,
             keyboardType: TextInputType.emailAddress,
-            controller: carControllers[3],
+            controller: carControllers[2],
           ),
           TextFormFieldBuilder(
             defaultBorder: true,
@@ -88,9 +83,9 @@ class CarForm extends StatelessWidget {
             hint: 'الحى',
             validator: Validators.required('required'),
             horizontalMargin: 0,
-            height: 6.h,
+            verticalMargin: 0,
             keyboardType: TextInputType.emailAddress,
-            controller: carControllers[4],
+            controller: carControllers[3],
           ),
         ],
       ),

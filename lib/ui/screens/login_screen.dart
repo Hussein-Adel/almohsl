@@ -10,7 +10,7 @@ import 'screens.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
-  final LoginController controller = Get.put(LoginController());
+  final AuthController controller = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -44,16 +44,16 @@ class LoginScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             SizedBox(
-                              height: 6.h,
+                              height: 7.h,
                               child: TextFormFieldBuilder(
                                 defaultBorder: true,
                                 borderColor: AppColors.green,
                                 color: Colors.white,
                                 hint: 'البريد الإكتروني',
-                                validator: Validators.required('required'),
                                 horizontalMargin: 7.5.w,
+                                verticalMargin: 0,
+                                validator: Validators.required('required'),
                                 height: 5.h,
-                                keyboardType: TextInputType.emailAddress,
                                 controller: controller.emailController,
                               ),
                             ),
@@ -68,6 +68,22 @@ class LoginScreen extends StatelessWidget {
                                 verticalMargin: 0,
                                 validator: Validators.required('required'),
                                 height: 5.h,
+                                obscureText: controller.showPass.value == true,
+                                suffixIcon: IconButton(
+                                  icon: Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 3.5.w),
+                                    child: Icon(
+                                      controller.showPass.value
+                                          ? Icons.visibility_rounded
+                                          : Icons.visibility_off_rounded,
+                                      color: controller.showPass.value
+                                          ? AppColors.green
+                                          : null,
+                                    ),
+                                  ),
+                                  onPressed: () => controller.changeShowPass(),
+                                ),
                                 controller: controller.passwordController,
                               ),
                             ),
@@ -91,7 +107,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                             const Spacer(),
                             GestureDetector(
-                              onTap: () => Get.to(ForgetPasswordScreen()),
+                              onTap: () => Get.to(const ForgetPasswordScreen()),
                               child: Text(
                                 'نسيت كلمة المرور ؟',
                                 style: TextStyle(
@@ -106,10 +122,8 @@ class LoginScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          Get.to(() => MainScreen());
-                          // var isSuccess =
-                          //     await controller.loginWithEmail(context);
-                          // isSuccess ? Get.to(() => MainScreen()) : null;
+                          var isSuccess = await controller.login(context);
+                          isSuccess ? Get.to(() => MainScreen()) : null;
                         },
                         child: EmptyCard(
                           verticalPadding: 0,

@@ -61,9 +61,9 @@ class _SplashScreenState extends State<SplashScreen>
       (status) async {
         if (status == AnimationStatus.completed) {
           if (authController.isLoggedIn) {
-            // Get.to(MainScreen());
+            Get.off(MainScreen());
           } else {
-            Get.to(LoginScreen());
+            Get.off(LoginScreen());
           }
         }
       },

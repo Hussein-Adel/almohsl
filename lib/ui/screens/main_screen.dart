@@ -11,6 +11,8 @@ import '../components/components.dart';
 class MainScreen extends StatelessWidget {
   MainScreen({super.key});
   MainController controller = Get.put(MainController());
+  AdminController adminController = Get.put(AdminController());
+  AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
@@ -28,17 +30,15 @@ class MainScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.green,
-        onPressed: controller.addCar,
-        child: const Icon(Icons.add),
-      ),
       horizontalPadding: 1.5.w,
       customAppBar: AppBar(
         title: const Text('الصفحة الرئيسية'),
         leading: IconButton(
           icon: const Icon(Icons.logout),
-          onPressed: () => Get.back(),
+          onPressed: () {
+            authController.logout();
+            Get.back();
+          },
         ),
         actions: [
           GestureDetector(
@@ -48,13 +48,16 @@ class MainScreen extends StatelessWidget {
                 AppAssets.kCollector,
               ),
             ),
-            onTap: () => showModalBottomSheet(
-                context: context,
-                backgroundColor: Colors.transparent,
-                isScrollControlled: true,
-                builder: (context) {
-                  return AdminBottomSheet();
-                }),
+            onTap: () {
+              adminController.resetData();
+              showModalBottomSheet(
+                  context: context,
+                  backgroundColor: Colors.transparent,
+                  isScrollControlled: true,
+                  builder: (context) {
+                    return AdminBottomSheet();
+                  });
+            },
           )
         ],
         backgroundColor: AppColors.darkGray,
@@ -64,6 +67,9 @@ class MainScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(
+                height: 0.25.h,
+              ),
               controller.fileName.value == ''
                   ? SizedBox(
                       height: 15.h,
@@ -129,16 +135,9 @@ class MainScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-              ListView.builder(
-                itemCount: controller.formCount.value,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return CarForm(
-                    carControllers: controller.textFieldList[index],
-                    deleteCar: () => controller.deleteCar(index),
-                  );
-                },
+              CarForm(
+                carControllers: controller.textFieldList.value,
+                deleteCar: controller.clearCar,
               ),
               SizedBox(height: 5.h),
             ],

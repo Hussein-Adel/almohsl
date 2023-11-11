@@ -14,11 +14,17 @@ Future setupLocator() async {
   locator.registerFactory(() => AuthenticationClient(
         InjectionClass.dio,
       ));
+  locator.registerFactory(() => AdminClient(
+        InjectionClass.dio,
+      ));
 
   /// repositories
   locator.registerFactory<AuthenticationRepository>(() =>
       AuthenticationRepository(
           authenticationClient: locator<AuthenticationClient>()));
+
+  locator.registerFactory<AdminRepository>(
+      () => AdminRepository(adminClient: locator<AdminClient>()));
 
   ///Shared preferences
   var instance = await SharedPref.getInstance();

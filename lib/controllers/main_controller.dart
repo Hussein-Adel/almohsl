@@ -9,22 +9,22 @@ class MainController extends GetxController {
   Rx<File>? file;
   RxString fileName = ''.obs;
 
-  List<List<TextEditingController>> textFieldList = [];
-  RxInt formCount = 0.obs;
-  addCar() {
-    formCount.value++;
-    textFieldList.add([
-      TextEditingController(),
-      TextEditingController(),
-      TextEditingController(),
-      TextEditingController(),
-      TextEditingController()
-    ]);
-  }
+  RxList<TextEditingController> textFieldList = <TextEditingController>[
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+  ].obs;
 
-  deleteCar(int index) {
-    formCount.value--;
-    textFieldList.removeAt(index);
+  clearCar() {
+    textFieldList
+      ..clear()
+      ..addAll([
+        TextEditingController(),
+        TextEditingController(),
+        TextEditingController(),
+        TextEditingController(),
+      ]);
   }
 
   getFile() async {

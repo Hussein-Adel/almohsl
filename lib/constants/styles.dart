@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
 
 import 'constants.dart';
@@ -57,3 +58,26 @@ class AppStyles {
     hintStyle: TextStyle(fontSize: 12.5.sp, color: AppColors.darkGray),
   );
 }
+
+Widget getDefaultSvgIcon(
+        {required String image,
+        double width = 12.0,
+        double height = 12.0,
+        Color? color,
+        BoxFit fit = BoxFit.contain}) =>
+    getSvgIcon(
+        image: image, height: height, width: width, fit: fit, color: color);
+
+Widget getSvgIcon(
+        {required String image,
+        double? width,
+        double? height,
+        Color? color,
+        BoxFit? fit}) =>
+    SvgPicture.asset(
+      image,
+      fit: fit ?? BoxFit.contain,
+      height: height?.w,
+      width: width?.w,
+      color: color,
+    );

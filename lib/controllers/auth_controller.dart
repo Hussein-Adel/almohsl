@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../data/di/locator.dart';
+import '../data/models/request/request.dart';
 import '../data/models/response/response.dart';
-import '../data/networks/dio_errors.dart';
-import '../data/networks/model_response.dart';
 import '../data/networks/network_constant.dart';
 import '../data/repository/auth_repo.dart';
 import '../data/shared/shared_pref.dart';
@@ -14,6 +14,16 @@ class AuthController extends GetxController {
   final _authenticationRepository = locator<AuthenticationRepository>();
   final _sharedPref = locator<SharedPref>();
   bool isLoggedIn = false;
+  final GlobalKey<FormState> formLoginKey = GlobalKey<FormState>();
+  RxBool showPass = false.obs;
+  RxBool isLoading = false.obs;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  changeShowPass() {
+    showPass.value = !showPass.value;
+  }
+
   UserData? currentUser = UserData();
 
   Future<void> checkUserLoggedIn() async {
@@ -26,9 +36,16 @@ class AuthController extends GetxController {
     }
   }
 
-  Future<Result<UserData>> login({required var body}) async {
+  Future<bool> login(BuildContext context) async {
+    if (formLoginKey.currentState?.validate() != true) return false;
+    isLoading.value = true;
+    FocusScope.of(context).unfocus();
     try {
-      final result = await _authenticationRepository.login(body);
+      var data = LoginRequest(
+          email: emailController.text,
+          password: passwordController.text,
+          token: '');
+      final result = await _authenticationRepository.login(data);
       if (result.data != null) {
         InjectionClass.dio.options.headers.addAll({
           NetworkConstant.kAuthorizationHeader:
@@ -37,55 +54,21 @@ class AuthController extends GetxController {
         await _sharedPref.storeLoginInfo(result.data!);
         isLoggedIn = _sharedPref.isUserLoggedIn();
         currentUser = result.data;
-        return Success(result.data!);
+        return true;
       } else {
         Get.showSnackbar(GetSnackBar(
           title: 'error',
           message: '${result.error?.message}',
         ));
-        return Error(errorMessage: result.error?.message);
+        return false;
       }
     } on DioException catch (e) {
       Get.showSnackbar(GetSnackBar(
         title: 'DioException error',
         message: '${e.message}',
       ));
-      return Error(errorMessage: DioExceptions.fromDioError(e).message);
-    } finally {
-      //Dismiss Dialog .
-      // Get.back();
-    }
-  }
-
-  Future<Result<UserData>> signUp({required var body}) async {
-    try {
-      final result = await _authenticationRepository.register(body);
-      if (result.data != null) {
-        InjectionClass.dio.options.headers.addAll({
-          NetworkConstant.kAuthorizationHeader:
-              '${NetworkConstant.tokenBuilder(result.data!.token!)} '
-        });
-        await _sharedPref.storeLoginInfo(result.data!);
-        isLoggedIn = _sharedPref.isUserLoggedIn();
-        currentUser = result.data;
-        return Success(result.data!);
-      } else {
-        Get.showSnackbar(GetSnackBar(
-          title: 'error',
-          message: '${result.error?.message}',
-        ));
-        return Error(errorMessage: result.error?.message);
-      }
-    } on DioException catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        title: 'DioException error',
-        message: '${e.message}',
-      ));
-      return Error(errorMessage: DioExceptions.fromDioError(e).message);
-    } finally {
-      //Dismiss Dialog .
-      // Get.back();
-    }
+      return false;
+    } finally {}
   }
 
   void logout() {
