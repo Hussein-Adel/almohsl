@@ -51,14 +51,15 @@ class LoginScreen extends StatelessWidget {
                                 color: Colors.white,
                                 hint: 'البريد الإكتروني',
                                 horizontalMargin: 7.5.w,
-                                verticalMargin: 0,
+                                verticalMargin: 0.h,
                                 validator: Validators.required('required'),
                                 height: 5.h,
+                                keyboardType: TextInputType.emailAddress,
                                 controller: controller.emailController,
                               ),
                             ),
                             SizedBox(
-                              height: 6.h,
+                              height: 7.h,
                               child: TextFormFieldBuilder(
                                 defaultBorder: true,
                                 borderColor: AppColors.green,
@@ -123,7 +124,7 @@ class LoginScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: () async {
                           var isSuccess = await controller.login(context);
-                          isSuccess ? Get.to(() => MainScreen()) : null;
+                          isSuccess ? Get.off(() => MainScreen()) : null;
                         },
                         child: EmptyCard(
                           verticalPadding: 0,

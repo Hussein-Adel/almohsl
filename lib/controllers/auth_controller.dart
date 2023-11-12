@@ -54,8 +54,10 @@ class AuthController extends GetxController {
         await _sharedPref.storeLoginInfo(result.data!);
         isLoggedIn = _sharedPref.isUserLoggedIn();
         currentUser = result.data;
+        isLoading.value = false;
         return true;
       } else {
+        isLoading.value = false;
         Get.showSnackbar(GetSnackBar(
           title: 'error',
           message: '${result.error?.message}',
@@ -63,12 +65,17 @@ class AuthController extends GetxController {
         return false;
       }
     } on DioException catch (e) {
-      Get.showSnackbar(GetSnackBar(
-        title: 'DioException error',
-        message: '${e.message}',
-      ));
+      isLoading.value = false;
+      Get.showSnackbar(
+        GetSnackBar(
+          title: 'DioException error',
+          message: '${e.message}',
+        ),
+      );
       return false;
-    } finally {}
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   void logout() {

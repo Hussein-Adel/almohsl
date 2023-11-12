@@ -1,5 +1,6 @@
 import 'package:almohsl/controllers/controllers.dart';
 import 'package:almohsl/ui/screens/admin_bottom_sheet.dart';
+import 'package:almohsl/ui/screens/login_screen.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ class MainScreen extends StatelessWidget {
           icon: const Icon(Icons.logout),
           onPressed: () {
             authController.logout();
-            Get.back();
+            Get.off(LoginScreen());
           },
         ),
         actions: [
