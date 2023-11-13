@@ -17,6 +17,9 @@ Future setupLocator() async {
   locator.registerFactory(() => AdminClient(
         InjectionClass.dio,
       ));
+  locator.registerFactory(() => CarClient(
+        InjectionClass.dio,
+      ));
 
   /// repositories
   locator.registerFactory<AuthenticationRepository>(() =>
@@ -25,6 +28,9 @@ Future setupLocator() async {
 
   locator.registerFactory<AdminRepository>(
       () => AdminRepository(adminClient: locator<AdminClient>()));
+
+  locator.registerFactory<CarRepository>(
+      () => CarRepository(carClient: locator<CarClient>()));
 
   ///Shared preferences
   var instance = await SharedPref.getInstance();

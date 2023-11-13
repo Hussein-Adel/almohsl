@@ -7,9 +7,13 @@ import 'components.dart';
 
 class CarForm extends StatelessWidget {
   const CarForm(
-      {super.key, required this.carControllers, required this.deleteCar});
+      {super.key,
+      required this.carControllers,
+      required this.deleteCar,
+      required this.keyForm});
   final List<TextEditingController> carControllers;
   final Function() deleteCar;
+  final GlobalKey keyForm;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,75 +23,78 @@ class CarForm extends StatelessWidget {
         color: AppColors.white.withOpacity(0.125),
         borderRadius: BorderRadius.circular(17.5),
       ),
-      height: 40.h,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5.w),
-                child: Text(
-                  'بيانات السيارة',
-                  style: TextStyle(
-                      color: AppColors.darkGray,
-                      fontWeight: FontWeight.bold,
-                      fontSize: AppFontSizes.kS4),
+      height: 45.h,
+      child: Form(
+        key: keyForm,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  child: Text(
+                    'بيانات السيارة',
+                    style: TextStyle(
+                        color: AppColors.darkGray,
+                        fontWeight: FontWeight.bold,
+                        fontSize: AppFontSizes.kS4),
+                  ),
                 ),
-              ),
-              IconButton(
-                onPressed: deleteCar,
-                icon: const Icon(Icons.delete, color: AppColors.error),
-              ),
-            ],
-          ),
-          TextFormFieldBuilder(
-            defaultBorder: true,
-            borderColor: AppColors.green,
-            color: Colors.transparent,
-            hint: 'رقم اللوحة',
-            validator: Validators.required('required'),
-            horizontalMargin: 0,
-            verticalMargin: 0,
-            keyboardType: TextInputType.emailAddress,
-            controller: carControllers[0],
-          ),
-          TextFormFieldBuilder(
-            defaultBorder: true,
-            borderColor: AppColors.green,
-            color: Colors.transparent,
-            hint: 'النوع',
-            validator: Validators.required('required'),
-            horizontalMargin: 0,
-            verticalMargin: 0,
-            keyboardType: TextInputType.emailAddress,
-            controller: carControllers[1],
-          ),
-          TextFormFieldBuilder(
-            defaultBorder: true,
-            borderColor: AppColors.green,
-            color: Colors.transparent,
-            hint: 'الموقع',
-            validator: Validators.required('required'),
-            horizontalMargin: 0,
-            verticalMargin: 0,
-            keyboardType: TextInputType.emailAddress,
-            controller: carControllers[2],
-          ),
-          TextFormFieldBuilder(
-            defaultBorder: true,
-            borderColor: AppColors.green,
-            color: Colors.transparent,
-            hint: 'الحى',
-            validator: Validators.required('required'),
-            horizontalMargin: 0,
-            verticalMargin: 0,
-            keyboardType: TextInputType.emailAddress,
-            controller: carControllers[3],
-          ),
-        ],
+                IconButton(
+                  onPressed: deleteCar,
+                  icon: const Icon(Icons.delete, color: AppColors.error),
+                ),
+              ],
+            ),
+            TextFormFieldBuilder(
+              defaultBorder: true,
+              borderColor: AppColors.green,
+              color: Colors.transparent,
+              hint: 'رقم اللوحة',
+              validator: Validators.required('required'),
+              horizontalMargin: 0,
+              verticalMargin: 0,
+              keyboardType: TextInputType.emailAddress,
+              controller: carControllers[0],
+            ),
+            TextFormFieldBuilder(
+              defaultBorder: true,
+              borderColor: AppColors.green,
+              color: Colors.transparent,
+              hint: 'النوع',
+              validator: Validators.required('required'),
+              horizontalMargin: 0,
+              verticalMargin: 0,
+              keyboardType: TextInputType.emailAddress,
+              controller: carControllers[1],
+            ),
+            TextFormFieldBuilder(
+              defaultBorder: true,
+              borderColor: AppColors.green,
+              color: Colors.transparent,
+              hint: 'الموقع',
+              validator: Validators.required('required'),
+              horizontalMargin: 0,
+              verticalMargin: 0,
+              keyboardType: TextInputType.emailAddress,
+              controller: carControllers[2],
+            ),
+            TextFormFieldBuilder(
+              defaultBorder: true,
+              borderColor: AppColors.green,
+              color: Colors.transparent,
+              hint: 'الحى',
+              validator: Validators.required('required'),
+              horizontalMargin: 0,
+              verticalMargin: 0,
+              keyboardType: TextInputType.emailAddress,
+              controller: carControllers[3],
+            ),
+          ],
+        ),
       ),
     );
   }

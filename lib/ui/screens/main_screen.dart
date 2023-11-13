@@ -30,6 +30,7 @@ class MainScreen extends StatelessWidget {
                 topRight: Radius.circular(35), topLeft: Radius.circular(35)),
           ),
         ),
+        onPressed: () => controller.uploadFile1Data(context),
       ),
       horizontalPadding: 1.5.w,
       customAppBar: AppBar(
@@ -139,6 +140,7 @@ class MainScreen extends StatelessWidget {
               CarForm(
                 carControllers: controller.textFieldList.value,
                 deleteCar: controller.clearCar,
+                keyForm: controller.carKey,
               ),
               SizedBox(height: 5.h),
             ],

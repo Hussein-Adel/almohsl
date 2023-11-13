@@ -24,7 +24,7 @@ class NetworkConstant {
   static const String kAdmins = "admins";
   static const String kUpdateInfo = "admins/update-info";
   static const String kUpdatePassword = "admins/update-password";
-  static const String kStore = "store";
+  static const String kUploadFile1Data = "upload-file1-data";
 
   static const String kChangePassword = "change-password";
 }
