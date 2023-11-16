@@ -2,11 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../constants/constants.dart';
+import '../ui/components/components.dart';
 
 class Util {
   static showSnackBar(BuildContext context, {required String? message}) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(message ?? "")));
+  }
+
+  static void choseFileDialog(BuildContext context,
+      {required VoidCallback confirmTab, required VoidCallback cancelTab}) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return ConfirmDeletion(
+          confirmTab: confirmTab,
+          cancelTab: cancelTab,
+        );
+      },
+    );
   }
 
   static Future<bool?> kToastNOInternet() {

@@ -12,4 +12,9 @@ abstract class CarClient {
 
   @POST(NetworkConstant.kUploadFile1Data)
   Future<BaseResponse<dynamic>> uploadFile1Data(@Body() var model);
+
+  @POST(NetworkConstant.kUploadFile1)
+  Future<BaseResponse<dynamic>> uploadFile1(@Body() var model);
+  @POST(NetworkConstant.kUploadFile2)
+  Future<BaseResponse<dynamic>> uploadFile2(@Body() var model);
 }

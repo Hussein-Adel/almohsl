@@ -16,56 +16,59 @@ class MainScreen extends StatelessWidget {
   AuthController authController = Get.find();
   @override
   Widget build(BuildContext context) {
-    return BaseScreen(
-      bottomNavigationBar: ButtonBuilder(
-        title: 'مقارنة البيانات',
-        titleStyle:
-            TextStyle(color: AppColors.white, fontSize: AppFontSizes.kS5),
-        borderColor: Colors.transparent,
-        buttonColor: AppColors.orange,
-        elevation: 5,
-        shape: MaterialStateProperty.all(
-          const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(35), topLeft: Radius.circular(35)),
-          ),
-        ),
-        onPressed: () => controller.uploadFile1Data(context),
-      ),
-      horizontalPadding: 1.5.w,
-      customAppBar: AppBar(
-        title: const Text('الصفحة الرئيسية'),
-        leading: IconButton(
-          icon: const Icon(Icons.logout),
-          onPressed: () {
-            authController.logout();
-            Get.off(LoginScreen());
-          },
-        ),
-        actions: [
-          GestureDetector(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 2.5.w),
-              child: Image.asset(
-                AppAssets.kCollector,
-              ),
+    return Obx(
+      () => BaseScreen(
+        isLoading: controller.isLoading.value,
+        bottomNavigationBar: ButtonBuilder(
+          title: 'مقارنة البيانات',
+          titleStyle:
+              TextStyle(color: AppColors.white, fontSize: AppFontSizes.kS5),
+          borderColor: Colors.transparent,
+          buttonColor: AppColors.orange,
+          elevation: 5,
+          shape: MaterialStateProperty.all(
+            const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(35), topLeft: Radius.circular(35)),
             ),
-            onTap: () {
-              adminController.resetData();
-              showModalBottomSheet(
-                  context: context,
-                  backgroundColor: Colors.transparent,
-                  isScrollControlled: true,
-                  builder: (context) {
-                    return AdminBottomSheet();
-                  });
+          ),
+          onPressed: () => controller.file != null
+              ? controller.choseFileAndUpload(context)
+              : controller.uploadFile1Data(context),
+        ),
+        horizontalPadding: 1.5.w,
+        customAppBar: AppBar(
+          title: const Text('الصفحة الرئيسية'),
+          leading: IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              authController.logout();
+              Get.off(LoginScreen());
             },
-          )
-        ],
-        backgroundColor: AppColors.darkGray,
-      ),
-      body: Obx(
-        () => SingleChildScrollView(
+          ),
+          actions: [
+            GestureDetector(
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 2.5.w),
+                child: Image.asset(
+                  AppAssets.kCollector,
+                ),
+              ),
+              onTap: () {
+                adminController.resetData();
+                showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    isScrollControlled: true,
+                    builder: (context) {
+                      return AdminBottomSheet();
+                    });
+              },
+            )
+          ],
+          backgroundColor: AppColors.darkGray,
+        ),
+        body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

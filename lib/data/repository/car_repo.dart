@@ -26,4 +26,38 @@ class CarRepository extends BaseRepository {
       return BaseModel.noNetworkConnection();
     }
   }
+
+  Future<BaseModel<dynamic>> uploadFile1(var model) async {
+    if (await checkForConnectivity()) {
+      try {
+        return BaseModel(
+            data: await carClient.uploadFile1(model).then((value) {
+          return value.data;
+        }));
+      } on DioException catch (e) {
+        return BaseModel(error: ErrorResponse(dioException: e));
+      }
+    } else {
+      Util.kToastNOInternet();
+
+      return BaseModel.noNetworkConnection();
+    }
+  }
+
+  Future<BaseModel<dynamic>> uploadFile2(var model) async {
+    if (await checkForConnectivity()) {
+      try {
+        return BaseModel(
+            data: await carClient.uploadFile2(model).then((value) {
+          return value.data;
+        }));
+      } on DioException catch (e) {
+        return BaseModel(error: ErrorResponse(dioException: e));
+      }
+    } else {
+      Util.kToastNOInternet();
+
+      return BaseModel.noNetworkConnection();
+    }
+  }
 }

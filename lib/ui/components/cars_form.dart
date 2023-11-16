@@ -23,7 +23,7 @@ class CarForm extends StatelessWidget {
         color: AppColors.white.withOpacity(0.125),
         borderRadius: BorderRadius.circular(17.5),
       ),
-      height: 45.h,
+      height: 47.5.h,
       child: Form(
         key: keyForm,
         child: Column(

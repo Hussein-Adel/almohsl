@@ -3,6 +3,7 @@ export 'bottom_sheet_builder.dart';
 export 'button_builder.dart';
 export 'cars_form.dart';
 export 'check_box_builder.dart';
+export 'confirm_deletion.dart';
 export 'divider_builder.dart';
 export 'empty_card.dart';
 export 'loading_widget.dart';
