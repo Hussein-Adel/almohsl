@@ -142,7 +142,6 @@ class AdminController extends GetxController {
         'password': passwordController.text,
         'password_confirmation': confirmPasswordController.text,
       };
-      print(data);
       final result = await _adminRepository.updatePassword(data);
       if (result.data != null) {
         isLoading.value = false;

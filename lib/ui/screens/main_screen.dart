@@ -20,7 +20,9 @@ class MainScreen extends StatelessWidget {
       () => BaseScreen(
         isLoading: controller.isLoading.value,
         bottomNavigationBar: ButtonBuilder(
-          title: 'مقارنة البيانات',
+          title: controller.bottomType.value == BottomSheetType.matchData
+              ? 'مقارنة الملفات'
+              : 'تسجيل البيانات',
           titleStyle:
               TextStyle(color: AppColors.white, fontSize: AppFontSizes.kS5),
           borderColor: Colors.transparent,
@@ -32,9 +34,15 @@ class MainScreen extends StatelessWidget {
                   topRight: Radius.circular(35), topLeft: Radius.circular(35)),
             ),
           ),
-          onPressed: () => controller.file != null
-              ? controller.choseFileAndUpload(context)
-              : controller.uploadFile1Data(context),
+          onPressed: () {
+            if (controller.bottomType.value == BottomSheetType.matchData) {
+              controller.matchedData();
+            } else if (controller.file != null) {
+              controller.choseFileAndUpload(context);
+            } else {
+              controller.uploadFile1Data(context);
+            }
+          },
         ),
         horizontalPadding: 1.5.w,
         customAppBar: AppBar(
@@ -111,7 +119,7 @@ class MainScreen extends StatelessWidget {
                           IconButton(
                             onPressed: controller.deleteFile,
                             icon: const Icon(Icons.delete,
-                                color: AppColors.error),
+                                color: AppColors.orange),
                           ),
                           SizedBox(
                             width: 30.w,
@@ -143,6 +151,7 @@ class MainScreen extends StatelessWidget {
               CarForm(
                 carControllers: controller.textFieldList.value,
                 deleteCar: controller.clearCar,
+                onChange: controller.onChange,
                 keyForm: controller.carKey,
               ),
               SizedBox(height: 5.h),

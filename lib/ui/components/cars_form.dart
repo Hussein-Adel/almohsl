@@ -10,9 +10,11 @@ class CarForm extends StatelessWidget {
       {super.key,
       required this.carControllers,
       required this.deleteCar,
-      required this.keyForm});
+      required this.keyForm,
+      required this.onChange});
   final List<TextEditingController> carControllers;
   final Function() deleteCar;
+  final Function(String) onChange;
   final GlobalKey keyForm;
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class CarForm extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: deleteCar,
-                  icon: const Icon(Icons.delete, color: AppColors.error),
+                  icon: const Icon(Icons.delete, color: AppColors.orange),
                 ),
               ],
             ),
@@ -53,45 +55,56 @@ class CarForm extends StatelessWidget {
               defaultBorder: true,
               borderColor: AppColors.green,
               color: Colors.transparent,
+              onChange: onChange,
               hint: 'رقم اللوحة',
               validator: Validators.required('required'),
               horizontalMargin: 0,
               verticalMargin: 0,
-              keyboardType: TextInputType.emailAddress,
               controller: carControllers[0],
             ),
             TextFormFieldBuilder(
               defaultBorder: true,
               borderColor: AppColors.green,
               color: Colors.transparent,
+              onChange: onChange,
               hint: 'النوع',
               validator: Validators.required('required'),
               horizontalMargin: 0,
               verticalMargin: 0,
-              keyboardType: TextInputType.emailAddress,
               controller: carControllers[1],
             ),
             TextFormFieldBuilder(
               defaultBorder: true,
               borderColor: AppColors.green,
               color: Colors.transparent,
+              onChange: onChange,
               hint: 'الموقع',
               validator: Validators.required('required'),
               horizontalMargin: 0,
               verticalMargin: 0,
-              keyboardType: TextInputType.emailAddress,
               controller: carControllers[2],
             ),
             TextFormFieldBuilder(
               defaultBorder: true,
               borderColor: AppColors.green,
               color: Colors.transparent,
+              onChange: onChange,
               hint: 'الحى',
               validator: Validators.required('required'),
               horizontalMargin: 0,
               verticalMargin: 0,
-              keyboardType: TextInputType.emailAddress,
               controller: carControllers[3],
+            ),
+            TextFormFieldBuilder(
+              defaultBorder: true,
+              borderColor: AppColors.green,
+              color: Colors.transparent,
+              onChange: onChange,
+              hint: 'الرابط',
+              validator: Validators.required('required'),
+              horizontalMargin: 0,
+              verticalMargin: 0,
+              controller: carControllers[4],
             ),
           ],
         ),

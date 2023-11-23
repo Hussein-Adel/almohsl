@@ -19,13 +19,13 @@ class _CarClient implements CarClient {
   String? baseUrl;
 
   @override
-  Future<BaseResponse<dynamic>> uploadFile1Data(dynamic model) async {
+  Future<BaseResponse<CarDataResponse>> uploadFile1Data(dynamic model) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = model;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponse<dynamic>>(Options(
+        _setStreamType<BaseResponse<CarDataResponse>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -41,19 +41,49 @@ class _CarClient implements CarClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = BaseResponse<dynamic>.fromJson(
+    final value = BaseResponse<CarDataResponse>.fromJson(
       _result.data!,
-      (json) => json as dynamic,
+      (json) => CarDataResponse.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }
 
   @override
-  Future<BaseResponse<dynamic>> uploadFile1(dynamic model) async {
+  Future<BaseResponseList<CarDataResponse>> uploadFile1(dynamic model) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = model;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponseList<CarDataResponse>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'upload-file1',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = BaseResponseList<CarDataResponse>.fromJson(
+      _result.data!,
+      (json) => CarDataResponse.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
+  }
+
+  @override
+  Future<BaseResponse<dynamic>> deleteFile1Record(int id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<BaseResponse<dynamic>>(Options(
       method: 'POST',
@@ -62,7 +92,7 @@ class _CarClient implements CarClient {
     )
             .compose(
               _dio.options,
-              'upload-file1',
+              'delete-file1-record/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -104,6 +134,36 @@ class _CarClient implements CarClient {
     final value = BaseResponse<dynamic>.fromJson(
       _result.data!,
       (json) => json as dynamic,
+    );
+    return value;
+  }
+
+  @override
+  Future<BaseResponseList<CarDataResponse>> matchedData() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BaseResponseList<CarDataResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'matched-data',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = BaseResponseList<CarDataResponse>.fromJson(
+      _result.data!,
+      (json) => CarDataResponse.fromJson(json as Map<String, dynamic>),
     );
     return value;
   }

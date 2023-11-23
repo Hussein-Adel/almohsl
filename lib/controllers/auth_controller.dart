@@ -14,6 +14,8 @@ class AuthController extends GetxController {
   final _authenticationRepository = locator<AuthenticationRepository>();
   final _sharedPref = locator<SharedPref>();
   bool isLoggedIn = false;
+  RxBool rememberMe = true.obs;
+
   final GlobalKey<FormState> formLoginKey = GlobalKey<FormState>();
   RxBool showPass = false.obs;
   RxBool isLoading = false.obs;
@@ -22,6 +24,10 @@ class AuthController extends GetxController {
 
   changeShowPass() {
     showPass.value = !showPass.value;
+  }
+
+  changeRememberMe(bool? value) {
+    rememberMe.value = value ?? false;
   }
 
   UserData? currentUser = UserData();
@@ -47,10 +53,12 @@ class AuthController extends GetxController {
           token: '');
       final result = await _authenticationRepository.login(data);
       if (result.data != null) {
-        InjectionClass.dio.options.headers.addAll({
-          NetworkConstant.kAuthorizationHeader:
-              '${NetworkConstant.tokenBuilder(result.data!.token!)} '
-        });
+        if (rememberMe.value) {
+          InjectionClass.dio.options.headers.addAll({
+            NetworkConstant.kAuthorizationHeader:
+                '${NetworkConstant.tokenBuilder(result.data!.token!)} '
+          });
+        }
         await _sharedPref.storeLoginInfo(result.data!);
         isLoggedIn = _sharedPref.isUserLoggedIn();
         currentUser = result.data;

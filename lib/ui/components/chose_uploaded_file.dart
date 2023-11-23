@@ -4,8 +4,8 @@ import 'package:sizer/sizer.dart';
 
 import 'components.dart';
 
-class ConfirmDeletion extends StatelessWidget {
-  const ConfirmDeletion({
+class ChoseUploadedFile extends StatelessWidget {
+  const ChoseUploadedFile({
     Key? key,
     required this.confirmTab,
     required this.cancelTab,
@@ -18,7 +18,7 @@ class ConfirmDeletion extends StatelessWidget {
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.5)),
       title: const TextBuilder(
-        text: 'هل أنت متأكد',
+        text: 'أختر نوع الملف المضاف',
         verticalPadding: 0,
       ),
       content: Column(
@@ -30,7 +30,7 @@ class ConfirmDeletion extends StatelessWidget {
               ButtonBuilder(
                 width: 30.w,
                 height: 5.h,
-                title: "حذف",
+                title: "الملف الأول",
                 buttonColor: AppColors.green,
                 borderColor: AppColors.green,
                 margin: EdgeInsets.symmetric(vertical: 1.h),
@@ -42,7 +42,7 @@ class ConfirmDeletion extends StatelessWidget {
                 height: 5.h,
                 buttonColor: AppColors.green,
                 borderColor: AppColors.green,
-                title: "إلغاء",
+                title: "الملف الثانى",
                 margin: EdgeInsets.symmetric(
                   vertical: 1.h,
                 ),

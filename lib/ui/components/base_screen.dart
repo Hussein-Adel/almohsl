@@ -32,8 +32,11 @@ class BaseScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButton: floatingActionButton,
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      appBar: customAppBar,
-      // drawer: const MenuScreen(),
+      appBar: customAppBar ??
+          DefaultAppBar(
+            title: titleAppBar,
+            onpOp: titleOnpOp,
+          ),
       body: Stack(
         children: [
           Container(

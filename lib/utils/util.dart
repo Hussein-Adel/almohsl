@@ -15,6 +15,19 @@ class Util {
     showDialog(
       context: context,
       builder: (context) {
+        return ChoseUploadedFile(
+          confirmTab: confirmTab,
+          cancelTab: cancelTab,
+        );
+      },
+    );
+  }
+
+  static void confirmDeletionDialog(BuildContext context,
+      {required VoidCallback confirmTab, required VoidCallback cancelTab}) {
+    showDialog(
+      context: context,
+      builder: (context) {
         return ConfirmDeletion(
           confirmTab: confirmTab,
           cancelTab: cancelTab,

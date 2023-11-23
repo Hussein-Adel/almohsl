@@ -96,8 +96,8 @@ class LoginScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             CheckBoxBuilder(
-                              onChanged: (value) {},
-                              value: true,
+                              onChanged: controller.changeRememberMe,
+                              value: controller.rememberMe.value,
                               activeColor:
                                   AppColors.darkGray.withOpacity(0.125),
                               checkColor: AppColors.green,
