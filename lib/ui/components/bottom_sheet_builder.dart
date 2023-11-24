@@ -15,15 +15,19 @@ class BottomSheetBuilder extends StatelessWidget {
       this.onPop,
       this.backgroundColor,
       this.scroll = true,
-      this.isLoading})
+      this.isLoading,
+      this.verticalPadding,
+      this.title})
       : super(key: key);
 
   final List<Widget> children;
   final CrossAxisAlignment? crossAlignment;
   final double? radius;
+  final double? verticalPadding;
   final double? height;
   final Widget? bottomWidget;
   final Color? backgroundColor;
+  final Widget? title;
   final Function()? onPop;
   final bool scroll;
   final bool? isLoading;
@@ -60,18 +64,27 @@ class BottomSheetBuilder extends StatelessWidget {
                             : const BorderRadius.only(
                                 topLeft: Radius.circular(25),
                                 topRight: Radius.circular(25)),
-                        color: AppColors.liteWight),
+                        color: AppColors.white),
                     height: height != null ? height! * 0.67 : 80.h,
-                    padding: EdgeInsets.symmetric(horizontal: 4.w),
-                    child: SingleChildScrollView(
-                      physics: scroll
-                          ? const AlwaysScrollableScrollPhysics()
-                          : const NeverScrollableScrollPhysics(),
-                      child: Column(
-                        crossAxisAlignment:
-                            crossAlignment ?? CrossAxisAlignment.center,
-                        children: children,
-                      ),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: 4.w, vertical: verticalPadding ?? 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        title ?? const SizedBox(),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            physics: scroll
+                                ? const AlwaysScrollableScrollPhysics()
+                                : const NeverScrollableScrollPhysics(),
+                            child: Column(
+                              crossAxisAlignment:
+                                  crossAlignment ?? CrossAxisAlignment.center,
+                              children: children,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   isLoading == true ? const LoadingWidget() : const SizedBox(),

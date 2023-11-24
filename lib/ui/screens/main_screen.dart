@@ -1,5 +1,6 @@
 import 'package:almohsl/controllers/controllers.dart';
 import 'package:almohsl/ui/screens/admin_bottom_sheet.dart';
+import 'package:almohsl/ui/screens/cars_screen.dart';
 import 'package:almohsl/ui/screens/login_screen.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class MainScreen extends StatelessWidget {
       () => BaseScreen(
         isLoading: controller.isLoading.value,
         bottomNavigationBar: ButtonBuilder(
-          title: controller.bottomType.value == BottomSheetType.matchData
+          title: controller.bottomType.value == BottomType.matchData
               ? 'مقارنة الملفات'
               : 'تسجيل البيانات',
           titleStyle:
@@ -34,13 +35,16 @@ class MainScreen extends StatelessWidget {
                   topRight: Radius.circular(35), topLeft: Radius.circular(35)),
             ),
           ),
-          onPressed: () {
-            if (controller.bottomType.value == BottomSheetType.matchData) {
-              controller.matchedData();
+          onPressed: () async {
+            bool isSuccess = false;
+            if (controller.bottomType.value == BottomType.matchData) {
+              isSuccess = await controller.matchedData();
+              isSuccess == true ? Get.to(CarsScreen()) : null;
             } else if (controller.file != null) {
               controller.choseFileAndUpload(context);
             } else {
-              controller.uploadFile1Data(context);
+              isSuccess = await controller.uploadFile1Data(context);
+              isSuccess == true ? Get.to(CarsScreen()) : null;
             }
           },
         ),
@@ -51,7 +55,7 @@ class MainScreen extends StatelessWidget {
             icon: const Icon(Icons.logout),
             onPressed: () {
               authController.logout();
-              Get.off(LoginScreen());
+              Get.offAll(LoginScreen());
             },
           ),
           actions: [

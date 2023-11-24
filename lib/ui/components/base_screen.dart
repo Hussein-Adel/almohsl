@@ -30,6 +30,7 @@ class BaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: backgroundColor ?? Colors.white,
       floatingActionButton: floatingActionButton,
       floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       appBar: customAppBar ??

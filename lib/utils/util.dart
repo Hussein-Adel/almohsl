@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/constants.dart';
 import '../ui/components/components.dart';
@@ -8,6 +9,15 @@ class Util {
   static showSnackBar(BuildContext context, {required String? message}) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text(message ?? "")));
+  }
+
+  static void openMap({required String uri}) async {
+    Uri url = Uri.parse(uri);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'whatsapp no installed';
+    }
   }
 
   static void choseFileDialog(BuildContext context,

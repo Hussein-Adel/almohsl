@@ -23,7 +23,7 @@ class MainController extends GetxController {
     getLocation();
   }
 
-  Rx<BottomSheetType> bottomType = BottomSheetType.matchData.obs;
+  Rx<BottomType> bottomType = BottomType.matchData.obs;
   RxList<CarDataResponse> cars = <CarDataResponse>[].obs;
   Rx<File>? file;
   RxString fileName = ''.obs;
@@ -40,7 +40,7 @@ class MainController extends GetxController {
   Position? currentPosition;
 
   clearCar() {
-    bottomType.value = BottomSheetType.matchData;
+    bottomType.value = BottomType.matchData;
     textFieldList
       ..clear()
       ..addAll([
@@ -57,7 +57,7 @@ class MainController extends GetxController {
     if (result != null) {
       file = File(result.files.single.path!).obs;
       fileName.value = result.names.single!;
-      bottomType.value = BottomSheetType.updateData;
+      bottomType.value = BottomType.updateData;
     } else {
       Util.kToastNOFilePicked();
       // User canceled the picker
@@ -65,7 +65,7 @@ class MainController extends GetxController {
   }
 
   deleteFile() {
-    bottomType.value = BottomSheetType.matchData;
+    bottomType.value = BottomType.matchData;
     file = null;
     fileName.value = '';
   }
@@ -83,9 +83,9 @@ class MainController extends GetxController {
       }
     });
     if (allEmpty) {
-      bottomType.value = BottomSheetType.matchData;
+      bottomType.value = BottomType.matchData;
     } else {
-      bottomType.value = BottomSheetType.updateData;
+      bottomType.value = BottomType.updateData;
     }
   }
 
@@ -139,7 +139,6 @@ class MainController extends GetxController {
   }
 
   Future<bool> deleteFile1Record(int index) async {
-    if (carKey.currentState?.validate() != true) return false;
     isLoading.value = true;
     try {
       final result = await _carRepository.deleteFile1Record(cars[index].id!);
@@ -188,8 +187,6 @@ class MainController extends GetxController {
           message: fileName.value,
         ));
         cars.value = result.data!;
-        print(result.data?.length);
-        print(cars.length);
         deleteFile();
         Get.to(CarsScreen());
         return true;
