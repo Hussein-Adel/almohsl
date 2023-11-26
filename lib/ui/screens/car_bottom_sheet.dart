@@ -57,6 +57,7 @@ class CarBottomSheet extends StatelessWidget {
         ),
         CarDataComponent(
           title: 'الرابط',
+          width: 65.w,
           subTitle: carData.url,
         ),
         CarDataComponent(
@@ -138,9 +139,11 @@ class CarDataComponent extends StatelessWidget {
       {super.key,
       required this.title,
       required this.subTitle,
-      this.divider = true});
+      this.divider = true,
+      this.width});
   final String? title;
   final String? subTitle;
+  final double? width;
   final bool divider;
   @override
   Widget build(BuildContext context) {
@@ -152,13 +155,15 @@ class CarDataComponent extends StatelessWidget {
             TextBuilder(
               text: title,
               bold: true,
+              width: 25.w,
               color: AppColors.navyBlue,
               verticalPadding: 0.75.h,
             ),
             TextBuilder(
               text: subTitle,
               color: AppColors.navyBlue,
-              width: 40.w,
+              horizontalPadding: 0,
+              width: width ?? 40.w,
               align: TextAlign.end,
               verticalPadding: 0.75.h,
             ),
