@@ -57,8 +57,23 @@ class CarBottomSheet extends StatelessWidget {
         ),
         CarDataComponent(
           title: 'الرابط',
-          width: 65.w,
-          subTitle: carData.url,
+          subTitle: '',
+          color: AppColors.urlColors[int.parse(carData.source ?? '1') - 1],
+          divider: false,
+        ),
+        TextBuilder(
+          text: carData.url,
+          color: AppColors.urlColors[int.parse(carData.source ?? '1') - 1],
+          horizontalPadding: 0,
+          maxLin: 2,
+          underline: true,
+          align: TextAlign.end,
+          verticalPadding: 0.75.h,
+        ),
+        DividerBuilder(
+          dividerColor: AppColors.gray,
+          thickness: 1,
+          width: 90.w,
         ),
         CarDataComponent(
           title: 'صانع المركبة',
@@ -140,11 +155,13 @@ class CarDataComponent extends StatelessWidget {
       required this.title,
       required this.subTitle,
       this.divider = true,
-      this.width});
+      this.width,
+      this.color});
   final String? title;
   final String? subTitle;
   final double? width;
   final bool divider;
+  final Color? color;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -156,14 +173,15 @@ class CarDataComponent extends StatelessWidget {
               text: title,
               bold: true,
               width: 25.w,
-              color: AppColors.navyBlue,
+              color: color ?? AppColors.navyBlue,
               verticalPadding: 0.75.h,
             ),
             TextBuilder(
               text: subTitle,
-              color: AppColors.navyBlue,
+              color: color ?? AppColors.navyBlue,
               horizontalPadding: 0,
               width: width ?? 40.w,
+              maxLin: 2,
               align: TextAlign.end,
               verticalPadding: 0.75.h,
             ),

@@ -43,7 +43,7 @@ class MainScreen extends StatelessWidget {
             } else if (controller.file != null) {
               controller.choseFileAndUpload(context);
             } else {
-              isSuccess = await controller.uploadFile1Data(context);
+              isSuccess = await controller.uploadFile1Data();
               isSuccess == true ? Get.to(CarsScreen()) : null;
             }
           },

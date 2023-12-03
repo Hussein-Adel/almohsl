@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../constants/constants.dart';
 import '../data/di/locator.dart';
@@ -23,6 +24,7 @@ class MainController extends GetxController {
     getLocation();
   }
 
+  PagingController<int, CarDataResponse>? pagingController;
   Rx<BottomType> bottomType = BottomType.matchData.obs;
   RxList<CarDataResponse> cars = <CarDataResponse>[].obs;
   Rx<File>? file;
@@ -70,6 +72,14 @@ class MainController extends GetxController {
     fileName.value = '';
   }
 
+  // startRankPagingControllerListener() {
+  //   pagingController = PagingController<int, CarDataResponse>(firstPageKey: 1);
+  //   pagingController?.addPageRequestListener((pageKey) {
+  //     uploadFile1Data(pageKey: pageKey);
+  //   });
+  //   isLoading.value = true;
+  // }
+
   Future<void> choseFileAndUpload(context) async {
     Util.choseFileDialog(context,
         confirmTab: uploadFile1, cancelTab: uploadFile2);
@@ -89,10 +99,9 @@ class MainController extends GetxController {
     }
   }
 
-  Future<bool> uploadFile1Data(BuildContext context) async {
+  Future<bool> uploadFile1Data() async {
     if (carKey.currentState?.validate() != true) return false;
     isLoading.value = true;
-    FocusScope.of(context).unfocus();
     try {
       var data = CarRequest(
           carNumber: textFieldList[0].text,
@@ -278,7 +287,6 @@ class MainController extends GetxController {
           fontSize: AppFontSizes.kS5);
       // return Future.error('Location services are disabled.');
     }
-
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();

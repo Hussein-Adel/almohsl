@@ -47,4 +47,17 @@ class AppColors {
   static const Color green = Color(0xff61b77a);
   static const Color cyan = Color(0xff1CD2E2);
   static const Color error = Color(0xffe61f34); // red Color
+
+  static const List<Color> urlColors = [
+    Color(0xff000000),
+    Color(0xff0074CC),
+    Color(0xff008000),
+    Color(0xffFF0000),
+    Color(0xffFFA500),
+    Color(0xff800080),
+    Color(0xff61b77a),
+    Color(0xff333333),
+    Color(0xffCCCCCC),
+    Color(0xff001F3F),
+  ];
 }
