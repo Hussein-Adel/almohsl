@@ -37,15 +37,16 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         body: Container(
-      padding: EdgeInsets.symmetric(horizontal: 5.w),
-      child: Center(
-        child: Image.asset(
-          AppAssets.kLogo,
-          scale: 1,
-        ),
-      ),
-    ));
+          padding: EdgeInsets.symmetric(horizontal: 5.w),
+          child: Center(
+            child: Image.asset(
+              AppAssets.kLogo,
+              scale: 1,
+            ),
+          ),
+        ));
   }
 
   @override

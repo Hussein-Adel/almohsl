@@ -17,6 +17,8 @@ class AuthController extends GetxController {
   RxBool rememberMe = true.obs;
 
   final GlobalKey<FormState> formLoginKey = GlobalKey<FormState>();
+
+  final GlobalKey<FormState> formForgetPasswordKey = GlobalKey<FormState>();
   RxBool showPass = false.obs;
   RxBool isLoading = false.obs;
   TextEditingController emailController = TextEditingController();
@@ -62,6 +64,40 @@ class AuthController extends GetxController {
         await _sharedPref.storeLoginInfo(result.data!);
         isLoggedIn = _sharedPref.isUserLoggedIn();
         currentUser = result.data;
+        isLoading.value = false;
+        return true;
+      } else {
+        isLoading.value = false;
+        Get.showSnackbar(GetSnackBar(
+          title: 'error',
+          message: '${result.error?.message}',
+        ));
+        return false;
+      }
+    } on DioException catch (e) {
+      isLoading.value = false;
+      Get.showSnackbar(
+        GetSnackBar(
+          title: 'DioException error',
+          message: '${e.message}',
+        ),
+      );
+      return false;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<bool> forgetPassword(BuildContext context) async {
+    if (formForgetPasswordKey.currentState?.validate() != true) return false;
+    isLoading.value = true;
+    FocusScope.of(context).unfocus();
+    try {
+      var data = {
+        'email': emailController.text,
+      };
+      final result = await _authenticationRepository.forgetPassword(data);
+      if (result.data != null) {
         isLoading.value = false;
         return true;
       } else {

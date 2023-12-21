@@ -5,7 +5,7 @@ class NetworkConstant {
   static const int kPageNumberValue = 1;
 
   static const _kDevBaseUrl = 'http://192.168.1.130:8000/api/';
-  static const _kReleaseBaseUrl = 'https://test.quick-plus.net/api/';
+  static const _kReleaseBaseUrl = 'https://almohsel.com/api/';
   static const kAppleStoreUrl = '';
   static const kGooglePlayUrl = '';
   static const kAndroidPackage = '';
@@ -29,6 +29,7 @@ class NetworkConstant {
   static const String kDeleteFile1Record = "delete-file1-record";
   static const String kUploadFile2 = "upload-file2";
   static const String kMatchedData = "matched-data";
+  static const String kFile1Data = "file1-data";
 
   static const String kChangePassword = "change-password";
 }

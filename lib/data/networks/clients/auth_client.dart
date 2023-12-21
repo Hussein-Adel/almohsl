@@ -16,14 +16,11 @@ abstract class AuthenticationClient {
   Future<BaseResponse<UserData>> login(
     @Body() LoginRequest model,
   );
+  @POST(NetworkConstant.kChangePassword)
+  Future<dynamic> forgetPassword(@Body() var model);
+
   @POST(NetworkConstant.kRegisterRequest)
   Future<BaseResponse<UserData>> register(@Body() var model);
-
-  @POST("${NetworkConstant.kChangePassword}/{email}")
-  Future<BaseResponse<dynamic>> changePassword(
-    @Body() var model,
-    @Path('email') String email,
-  );
 
   @PUT(NetworkConstant.kUpdateInfo)
   Future<BaseResponse<UserData>> updateInfo(

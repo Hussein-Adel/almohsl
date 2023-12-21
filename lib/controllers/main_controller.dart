@@ -16,6 +16,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import '../constants/constants.dart';
 import '../data/di/locator.dart';
 import '../data/models/response/response.dart';
+import '../data/networks/network_constant.dart';
 
 class MainController extends GetxController {
   @override
@@ -24,7 +25,7 @@ class MainController extends GetxController {
     getLocation();
   }
 
-  PagingController<int, CarDataResponse>? pagingController;
+  PagingController<int, CarDataResponse>? pagingCarController;
   Rx<BottomType> bottomType = BottomType.matchData.obs;
   RxList<CarDataResponse> cars = <CarDataResponse>[].obs;
   Rx<File>? file;
@@ -72,13 +73,23 @@ class MainController extends GetxController {
     fileName.value = '';
   }
 
-  // startRankPagingControllerListener() {
-  //   pagingController = PagingController<int, CarDataResponse>(firstPageKey: 1);
-  //   pagingController?.addPageRequestListener((pageKey) {
-  //     uploadFile1Data(pageKey: pageKey);
-  //   });
-  //   isLoading.value = true;
-  // }
+  startFile1DataPagingControllerListener() {
+    pagingCarController =
+        PagingController<int, CarDataResponse>(firstPageKey: 1);
+    pagingCarController?.addPageRequestListener((pageKey) {
+      getFile1Data(pageKey: pageKey);
+    });
+    isLoading.value = true;
+  }
+
+  startMatchedDataPagingControllerListener() {
+    pagingCarController =
+        PagingController<int, CarDataResponse>(firstPageKey: 1);
+    pagingCarController?.addPageRequestListener((pageKey) {
+      matchedData(pageKey: pageKey);
+    });
+    isLoading.value = true;
+  }
 
   Future<void> choseFileAndUpload(context) async {
     Util.choseFileDialog(context,
@@ -113,11 +124,8 @@ class MainController extends GetxController {
           lat: '${currentPosition?.latitude}');
       final result = await _carRepository.uploadFile1Data(data);
       if (result.data != null) {
-        cars
-          ..clear()
-          ..add(result.data!);
-        Get.to(CarsScreen());
         isLoading.value = false;
+        startFile1DataPagingControllerListener();
         return true;
       } else {
         isLoading.value = false;
@@ -319,13 +327,54 @@ class MainController extends GetxController {
     return await Geolocator.getCurrentPosition();
   }
 
-  Future<bool> matchedData() async {
+  Future<bool> matchedData({required int pageKey}) async {
     isLoading.value = true;
     try {
-      final result = await _carRepository.matchedData();
+      final result = await _carRepository.matchedData(pageKey: pageKey);
       if (result.data != null) {
         isLoading.value = false;
-        cars.value = result.data!;
+        final isLastPage = result.data!.length < NetworkConstant.kPageSize;
+        if (isLastPage) {
+          pagingCarController?.appendLastPage(result.data!);
+        } else {
+          final nextPageKey = pageKey + 1;
+          pagingCarController?.appendPage(result.data!, nextPageKey);
+        }
+        return true;
+      } else {
+        isLoading.value = false;
+        Get.showSnackbar(GetSnackBar(
+          title: 'error',
+          message: '${result.error?.message}',
+        ));
+        return false;
+      }
+    } on DioException catch (e) {
+      isLoading.value = false;
+      Get.showSnackbar(
+        GetSnackBar(
+          title: 'DioException error',
+          message: '${e.message}',
+        ),
+      );
+      return false;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<bool> getFile1Data({required int pageKey}) async {
+    try {
+      final result = await _carRepository.getFile1Data(pageKey: pageKey);
+      if (result.data != null) {
+        isLoading.value = false;
+        final isLastPage = result.data!.length < NetworkConstant.kPageSize;
+        if (isLastPage) {
+          pagingCarController?.appendLastPage(result.data!);
+        } else {
+          final nextPageKey = pageKey + 1;
+          pagingCarController?.appendPage(result.data!, nextPageKey);
+        }
         return true;
       } else {
         isLoading.value = false;

@@ -79,11 +79,28 @@ class CarRepository extends BaseRepository {
     }
   }
 
-  Future<BaseModel<List<CarDataResponse>>> matchedData() async {
+  Future<BaseModel<List<CarDataResponse>>> matchedData({int? pageKey}) async {
     if (await checkForConnectivity()) {
       try {
         return BaseModel(
-            data: await carClient.matchedData().then((value) {
+            data: await carClient.matchedData(pageKey).then((value) {
+          return value.data;
+        }));
+      } on DioException catch (e) {
+        return BaseModel(error: ErrorResponse(dioException: e));
+      }
+    } else {
+      Util.kToastNOInternet();
+
+      return BaseModel.noNetworkConnection();
+    }
+  }
+
+  Future<BaseModel<List<CarDataResponse>>> getFile1Data({int? pageKey}) async {
+    if (await checkForConnectivity()) {
+      try {
+        return BaseModel(
+            data: await carClient.getFile1Data(pageKey).then((value) {
           return value.data;
         }));
       } on DioException catch (e) {

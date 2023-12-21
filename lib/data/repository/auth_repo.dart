@@ -29,30 +29,28 @@ class AuthenticationRepository extends BaseRepository {
     }
   }
 
-  Future<BaseModel<UserData>> register(var model) async {
+  Future<dynamic> forgetPassword(var model) async {
     if (await checkForConnectivity()) {
       try {
         return BaseModel(
-            data: await authenticationClient.register(model).then((value) {
-          return value.data;
+            data:
+                await authenticationClient.forgetPassword(model).then((value) {
+          return value;
         }));
       } on DioException catch (e) {
         return BaseModel(error: ErrorResponse(dioException: e));
       }
     } else {
-      Util.kToastNOInternet();
-
+      //Util.kToastNOInternet();
       return BaseModel.noNetworkConnection();
     }
   }
 
-  Future<BaseModel<dynamic>> changePassword(var model, String email) async {
+  Future<BaseModel<UserData>> register(var model) async {
     if (await checkForConnectivity()) {
       try {
         return BaseModel(
-            data: await authenticationClient
-                .changePassword(model, email)
-                .then((value) {
+            data: await authenticationClient.register(model).then((value) {
           return value.data;
         }));
       } on DioException catch (e) {

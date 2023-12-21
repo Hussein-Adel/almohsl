@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 
-import '../../models/request/car_request.dart';
 import '../../models/response/response.dart';
 import '../network_constant.dart';
 
@@ -23,6 +22,11 @@ abstract class CarClient {
   @POST(NetworkConstant.kUploadFile2)
   Future<BaseResponse<dynamic>> uploadFile2(@Body() var model);
 
-  @GET(NetworkConstant.kMatchedData)
-  Future<BaseResponseList<CarDataResponse>> matchedData();
+  @GET('${NetworkConstant.kMatchedData}?page={pageKey}')
+  Future<BaseResponseList<CarDataResponse>> matchedData(
+      @Path('pageKey') int? pageKey);
+
+  @GET('${NetworkConstant.kFile1Data}?page={pageKey}')
+  Future<BaseResponseList<CarDataResponse>> getFile1Data(
+      @Path('pageKey') int? pageKey);
 }

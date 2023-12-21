@@ -38,8 +38,8 @@ class MainScreen extends StatelessWidget {
           onPressed: () async {
             bool isSuccess = false;
             if (controller.bottomType.value == BottomType.matchData) {
-              isSuccess = await controller.matchedData();
-              isSuccess == true ? Get.to(CarsScreen()) : null;
+              controller.startMatchedDataPagingControllerListener();
+              Get.to(CarsScreen());
             } else if (controller.file != null) {
               controller.choseFileAndUpload(context);
             } else {

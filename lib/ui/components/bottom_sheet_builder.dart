@@ -64,7 +64,7 @@ class BottomSheetBuilder extends StatelessWidget {
                             : const BorderRadius.only(
                                 topLeft: Radius.circular(25),
                                 topRight: Radius.circular(25)),
-                        color: AppColors.white),
+                        color: AppColors.lightGrey),
                     height: height != null ? height! * 0.67 : 80.h,
                     padding: EdgeInsets.symmetric(
                         horizontal: 4.w, vertical: verticalPadding ?? 0),
