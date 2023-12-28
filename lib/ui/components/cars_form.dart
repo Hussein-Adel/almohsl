@@ -68,7 +68,6 @@ class CarForm extends StatelessWidget {
               color: Colors.transparent,
               onChange: onChange,
               hint: 'النوع',
-              validator: Validators.required('required'),
               horizontalMargin: 0,
               verticalMargin: 0,
               controller: carControllers[1],

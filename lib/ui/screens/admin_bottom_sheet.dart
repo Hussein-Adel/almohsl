@@ -177,17 +177,6 @@ class AdminBottomSheet extends StatelessWidget {
                     ),
                   ),
                 ),
-                Column(
-                  children: [
-                    SizedBox(height: 15.h),
-                    TextBuilder(
-                      text: 'تم التطوير بواسطة',
-                      verticalPadding: 1.h,
-                    ),
-                    Image.asset(AppAssets.kCompanyLogo,
-                        height: 40.sp, width: 50.sp, fit: BoxFit.fill)
-                  ],
-                ),
               ]
             : adminController.adminSwitch.value == AdminSwitch.updateUser
                 ? [
@@ -275,17 +264,6 @@ class AdminBottomSheet extends StatelessWidget {
                       buttonColor: AppColors.green,
                       onPressed: () => adminController.updateInfo(context),
                     ),
-                    Column(
-                      children: [
-                        SizedBox(height: 15.h),
-                        TextBuilder(
-                          text: 'تم التطوير بواسطة',
-                          verticalPadding: 1.h,
-                        ),
-                        Image.asset(AppAssets.kCompanyLogo,
-                            height: 40.sp, width: 50.sp, fit: BoxFit.fill)
-                      ],
-                    ),
                   ]
                 : [
                     SizedBox(
@@ -365,17 +343,6 @@ class AdminBottomSheet extends StatelessWidget {
                       borderColor: Colors.transparent,
                       buttonColor: AppColors.green,
                       onPressed: () => adminController.updatePassword(context),
-                    ),
-                    Column(
-                      children: [
-                        SizedBox(height: 15.h),
-                        TextBuilder(
-                          text: 'تم التطوير بواسطة',
-                          verticalPadding: 1.h,
-                        ),
-                        Image.asset(AppAssets.kCompanyLogo,
-                            height: 40.sp, width: 50.sp, fit: BoxFit.fill)
-                      ],
                     ),
                   ],
       ),
